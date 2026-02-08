@@ -1,19 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const dns = require("dns");
+
+dns.setServers(["1.1.1.1"]); // 🔥 DNS FIX (Cloudflare)
 
 const connectDB = require("./config/Db");
 
 const userRoutes = require("./routes/userRoute");
 const productRoutes = require("./routes/productRoute");
 const cartRoutes = require("./routes/cartRoutes");
-const checkoutRoutes = require("./routes/checkoutRoute"); 
+const checkoutRoutes = require("./routes/checkoutRoute");
 const orderRoutes = require("./routes/orderRoute");
 const uploadRoutes = require("./routes/uploadRoute");
 const subscribeRoutes = require("./routes/subscribeRoute");
-const adminRoutes = require("./routes/adminRoute"); 
+const adminRoutes = require("./routes/adminRoute");
 const productAdminRoutes = require("./routes/productAdminRoute");
-const adminOrderRoutes = require("./routes/adminOrderRoutes");   
+const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 dotenv.config();
 
@@ -41,10 +44,9 @@ app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/subscribe", subscribeRoutes);
-app.use("/api/admin/products", productAdminRoutes); 
 
-
-//admin route
+// Admin routes
+app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
 
